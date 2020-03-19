@@ -76,7 +76,7 @@ const app = new Vue({
         addMessage(message) {
             this.messages.push(message);
             axios.post('/messages', message).then(response =>{
-                // console.log(response.data);
+                //console.log(response);
             });
         },
 
@@ -88,9 +88,8 @@ const app = new Vue({
                         return;
                     }
 
-                    Notification.requestPermission( permission => { console.log(messages);
+                    Notification.requestPermission( permission => { //console.log(messages);
                         let notification = new Notification(messages.user + " " +'has sent message!!', {
-                           // body: messages.user,
                             body: messages.message, // content for the alert
                         });
 
@@ -101,16 +100,13 @@ const app = new Vue({
                     });
                 })
         },
-        isTyping() {
-            let channel = Echo.private('chat');
 
-            setTimeout(function() {
-                channel.whisper('typing', {
-                    user: Laravel.user,
-                    typing: true
-                });
-            }, 3000);
-        },
+        // getUserId(event){
+        //     this.userId = event.target.id;
+        //     //this.createChatWindow(this.user,event.target.innerHTML);
+        //     console.log(this.userId);
+        // },
+
     }
 });
 

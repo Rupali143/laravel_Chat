@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
+        "@pusher/chatkit-client": "^1.14.1",
         "laravel-echo": "^1.6.1"
     }
 }

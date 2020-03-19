@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Message;
 use App\User;
+use App\Chat_participation;
 use App\Events\MessageSent;
 use App\Events\MessagePublished;
 class ChatsController extends Controller
@@ -35,6 +36,12 @@ class ChatsController extends Controller
         broadcast(new MessageSent($user,$message))->toOthers();
 
         event(new MessagePublished($user,$message));
+
+        $chat = new Chat_participation();
+//        if(!exit($user->id)) {
+            $chat->user_id = $user->id;
+            $chat->save();
+//        }
 
         return response($message, 201);
 //        return response(['status' => 'Message Sent!!',$message]);

@@ -40,6 +40,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     encrypted: true
 // });
 
+import { ChatManager, TokenProvider } from '@pusher/chatkit-client'
+
 
 import Echo from "laravel-echo"
 window.Pusher = require('pusher-js');
@@ -49,3 +51,21 @@ window.Echo = new Echo({
     cluster: 'ap2',
     encrypted: true
 });
+
+
+// var pusher = new Pusher('c6d22a406cb5c7c7a1db');
+// var presenceChannel = pusher.subscribe('title');
+
+const chatManager = new ChatManager({
+    instanceLocator: 'v1:us1:b4b4df3b-2a8f-4764-aa4b-4f7bab22c0ff',
+    userId: '1',
+    tokenProvider: new TokenProvider({ url: '/' })
+});
+//
+chatManager.connect()
+    .then(currentUser => {
+        console.log('Successful connection', currentUser)
+    })
+    .catch(err => {
+        console.log('Error on connection', err)
+    });
